@@ -8,5 +8,5 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(project main.cpp)
 target_link_libraries(project ${OpenCV_LIBS})
 
-add_executable(imgtools-exe imgtools/imgtools.cpp)
-target_link_libraries(imgtools-exe ${OpenCV_LIBS})
+add_executable(imgtools imgtools/imgtools.cpp)
+target_link_libraries(imgtools ${OpenCV_LIBS})
