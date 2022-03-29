@@ -9,11 +9,9 @@ int main(int argc, char **argv) {
     cv::Mat out;
     out.create(X, Y, CV_8UC3);
 
-    ArrayP<int> arr = Algo::Grid::l2((int) X, (int) Y);
-    std::cout << "main: passed Grid::l2" << std::endl;
+    ArrayP<int> arr = Algo::Grid::l2(X, Y);
     draw(arr, out);
-    std::cout << "main: passed draw" << std::endl;
     
     cv::imwrite(OUT, out);
-    std::cout << "main: passed imwrite" << std::endl;
+    std::cerr << "main: last in main" << std::endl;
 }
