@@ -6,17 +6,16 @@
 
 
 
-
 namespace Algo::Grid {
 
     
 
     // l2 for [l]ength, [2] parameters
-    namespace l2 {
+    namespace _l2 {
 
         
         template<typename T>
-        ArrayP<T> grid2(T dx, T dy) {
+        ArrayP<T> l2(T dx, T dy) {
             ArrayP<T> out(dx*dy);
             for (T y = 0; y < dy; y++)
                 for (T x = 0; x < dx; x++)
@@ -25,7 +24,7 @@ namespace Algo::Grid {
         }
 
         template<typename T>
-        ArrayP<T> grid2(T dx, T dy, T step) {
+        ArrayP<T> l2(T dx, T dy, T step) {
             ArrayP<T> out(dx*dy/step);
             for (T y = 0; y < dy; y += step)
                 for (T x = 0; x < dx; x += step)
@@ -34,7 +33,7 @@ namespace Algo::Grid {
         }
 
         template<typename T>
-        ArrayP<T> grid2(T dx, T dy, T sx, T sy) {
+        ArrayP<T> l2(T dx, T dy, T sx, T sy) {
             ArrayP<T> out(dx*dy/sx/sy);
             for (T y = 0; y < dy; y += sy)
                 for (T x = 0; x < dx; x += sx)
@@ -43,15 +42,16 @@ namespace Algo::Grid {
         }
 
     }
+    using namespace _l2;
 
 
     
     // lf1 for [l]ength, [f]unction, [1] parameter
-    namespace lf1 {
+    namespace _lf1 {
 
         
         template<typename T>
-        ArrayP<T> grid1lf(T dx, Point<T> (*func) (T) ) {
+        ArrayP<T> lf1(T dx, Point<T> (*func) (T) ) {
             ArrayP<T> out(dx);
             for (T x = 0; x < dx; x++)
                 out[x] = func(x);
@@ -59,7 +59,7 @@ namespace Algo::Grid {
         }
     
         template<typename T>
-        ArrayP<T> grid1lf(T dx, T step, Point<T> (*func) (T) ) {
+        ArrayP<T> lf1(T dx, T step, Point<T> (*func) (T) ) {
             ArrayP<T> out(dx/step);
             for (T x = 0; x < dx; x += step)
                 out[x] = func(x);
@@ -67,14 +67,15 @@ namespace Algo::Grid {
         }
 
     }
+    using namespace _lf1;
 
 
 
     // rf1 for [r]ange, [f]unction, [1] parameter
-    namespace rf1 {
+    namespace _rf1 {
     
         template<typename T>
-        ArrayP<T> grid1rf(T x0, T x1, Point<T> (*func) (T) ) {
+        ArrayP<T> rf1(T x0, T x1, Point<T> (*func) (T) ) {
             ArrayP<T> out(x1-x0);
             for (T x = x0; x < (x1-x0); x++)
                 out[x] = func(x);
@@ -82,7 +83,7 @@ namespace Algo::Grid {
         }
 
         template<typename T>
-        ArrayP<T> grid1rf(T x0, T x1, T step, Point<T> (*func) (T) ) {
+        ArrayP<T> rf1(T x0, T x1, T step, Point<T> (*func) (T) ) {
             ArrayP<T> out((x1-x0)/step);
             for (T x = x0; x < (x1-x0)/step; x += step)
                 out[x] = func(x);
@@ -90,6 +91,7 @@ namespace Algo::Grid {
         }
 
     }
+    using namespace _rf1;
     
 }
 
