@@ -11,4 +11,7 @@ target_link_libraries(project ${OpenCV_LIBS})
 add_executable(imgtools imgtools/imgtools.cpp)
 target_link_libraries(imgtools ${OpenCV_LIBS})
 
+# Warning and error display
 add_compile_options(-Wall -Wextra -Werror -pedantic)
+# Sanitizer
+add_compile_options(-fsanitize=address)

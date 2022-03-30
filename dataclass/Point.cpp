@@ -16,7 +16,8 @@ public:
              T mass = 1, T radius = 1,
              cv::Vec3b color=(0, 0, 0)
         ): x(x), y(y), sx(sx), sy(sy),
-           mass(mass), radius(radius)
+           mass(mass), radius(radius),
+           color(color)
         {}
     
     
