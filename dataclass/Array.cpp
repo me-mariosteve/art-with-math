@@ -23,7 +23,13 @@ public:
     Array<T>(size_t size): size(size) {
         ptr = (T *) malloc(sizeof(T) * size);
     }
-    
+
+    Array<T>(size_t size, T tmp): size(size) {
+        ptr = (T *) malloc(sizeof(T) * size);
+        for (size_t id = 0; id < size; id++) {
+            ptr[id] = tmp;
+        }
+    }
     
     inline T &operator[](size_t id) {
         return ptr[id];
@@ -46,24 +52,27 @@ public:
             target -> ptr[id] = ptr[id];
     }
 
-    void map(Func1 func) {
+    template<typename F>
+    void map(F func) {
         for (size_t id = 0; id < size; id++) 
             ptr[id] = func(ptr[id]);
     }
-    
-    void map(Proc1 proc) {
+
+    template<typename P>
+    void map(P proc) {
         for (size_t id = 0; id < size; id++) 
             proc(ptr[id]);
     }
-    
-    void map(Func2 func, FReduce freduce) {
+
+    template<typename F, typename R>
+    void map(F func, R reduce) {
 
         Array<T> _new(size);
         for (int i = 0; i < size; i++) {
             Array<T> _id(size);
             for (int j = 0; j < size; j++)
                 _id[j] = func(ptr[i], ptr[j]);
-            _new.ptr[i] = freduce(_id);
+            _new.ptr[i] = reduce(_id);
         }
         _new.copy(this);
     }

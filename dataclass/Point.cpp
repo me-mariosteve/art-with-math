@@ -11,10 +11,10 @@ public:
     T x, y, sx, sy;
     T mass, radius;
     cv::Vec3b color;
-  
-    Point<T>(T x, T y, T sx=0, T sy=0,
-             T mass = 1, T radius = 1,
-             cv::Vec3b color=(0, 0, 0)
+    
+    Point<T>(T x = T(), T y = T(), T sx = T(), T sy = T(),
+             T mass = T(), T radius = T(),
+             cv::Vec3b color=cv::Vec3b(0, 0, 0)
         ): x(x), y(y), sx(sx), sy(sy),
            mass(mass), radius(radius),
            color(color)
@@ -36,8 +36,8 @@ public:
     inline Point<T> operator sym##= (T other) {                 \
         return (*this = *this sym other); }
     OP(+)
-        OP(-)
-        OP(*)
+    OP(-)
+    OP(*)
         OP(/)
 # undef OP
     

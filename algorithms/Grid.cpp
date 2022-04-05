@@ -15,7 +15,7 @@ namespace Algo::Grid {
 
         
         template<typename T>
-        ArrayP<T> l2(T dx, T dy) {
+        ArrayP<T> l2(T dx, T dy, Point<T> tmp=(0, 0)) {
             ArrayP<T> out(dx*dy);
             for (T y = 0; y < dy; y++)
                 for (T x = 0; x < dx; x++)
