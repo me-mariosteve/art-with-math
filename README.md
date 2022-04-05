@@ -27,5 +27,5 @@ Then run the following command in the root folder:
 It creates the cmake configuration files in `build/` then build the project.
 
 The produced executables are put in `build/`:
-- [`main.cpp`](main/cpp) -> `build/project`
+- [`main.cpp`](main.cpp) -> `build/project`
 - [`imgtools/imgtools.cpp`](imgtools/imgtools.cpp) -> `build/imgtools`
