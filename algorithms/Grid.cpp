@@ -50,16 +50,16 @@ namespace Algo::Grid {
     namespace _lf1 {
 
         
-        template<typename T>
-        ArrayP<T> lf1(T dx, Point<T> (*func) (T) ) {
+        template<typename T, typename F>
+        ArrayP<T> lf1(T dx, F func ) {
             ArrayP<T> out(dx);
             for (T x = 0; x < dx; x++)
                 out[x] = func(x);
             return out;
         }
     
-        template<typename T>
-        ArrayP<T> lf1(T dx, T step, Point<T> (*func) (T) ) {
+        template<typename T, typename F>
+        ArrayP<T> lf1(T dx, T step, F func ) {
             ArrayP<T> out(dx/step);
             for (T x = 0; x < dx; x += step)
                 out[x] = func(x);
@@ -74,16 +74,16 @@ namespace Algo::Grid {
     // rf1 for [r]ange, [f]unction, [1] parameter
     namespace _rf1 {
     
-        template<typename T>
-        ArrayP<T> rf1(T x0, T x1, Point<T> (*func) (T) ) {
+        template<typename T, typename F>
+        ArrayP<T> rf1(T x0, T x1, F func) {
             ArrayP<T> out(x1-x0);
             for (T x = x0; x < (x1-x0); x++)
                 out[x] = func(x);
             return out;
         }
 
-        template<typename T>
-        ArrayP<T> rf1(T x0, T x1, T step, Point<T> (*func) (T) ) {
+        template<typename T, typename F>
+        ArrayP<T> rf1(T x0, T x1, T step, F func) {
             ArrayP<T> out((x1-x0)/step);
             for (T x = x0; x < (x1-x0)/step; x += step)
                 out[x] = func(x);
@@ -96,3 +96,4 @@ namespace Algo::Grid {
 }
 
 # endif /* ALGO_GRID_GENERATE_CPP_DEFINED */
+
