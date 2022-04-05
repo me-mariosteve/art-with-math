@@ -58,12 +58,6 @@ public:
             ptr[id] = func(ptr[id]);
     }
 
-    template<typename P>
-    void map(P proc) {
-        for (size_t id = 0; id < size; id++) 
-            proc(ptr[id]);
-    }
-
     template<typename F, typename R>
     void map(F func, R reduce) {
 
