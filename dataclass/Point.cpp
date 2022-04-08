@@ -14,7 +14,7 @@ public:
     
     Point<T>(T x = T(), T y = T(), T sx = T(), T sy = T(),
              T mass = T(), T radius = T(),
-             cv::Vec3b color=cv::Vec3b(0, 0, 0)
+             cv::Vec3b color=(0, 0, 0)
         ): x(x), y(y), sx(sx), sy(sy),
            mass(mass), radius(radius),
            color(color)
@@ -38,7 +38,7 @@ public:
     OP(+)
     OP(-)
     OP(*)
-        OP(/)
+    OP(/)
 # undef OP
     
         inline T dist(Point<T> other) {
@@ -85,9 +85,13 @@ Data &operator>>(Data &in, Point<T> &_this) {
 
 template<typename T>
 void draw(Point<T> _this, cv::Mat mat) {
-    for (T y = -_this.radius; y <= _this.radius; y++)
-        for (T x = -_this.radius; x <= _this.radius; x++)
-            mat.at<cv::Vec3b>(x, y) = _this.color;
+    for (T y = -_this.radius; y <= _this.radius && y < mat.cols; y++) {
+        if (y < 0) continue;
+        for (T x = -_this.radius; x <= _this.radius && x < mat.rows; x++) {
+            if (x < 0) continue;
+            mat.at<cv::Vec3b>(_this.x+x, _this.y+y) = _this.color;
+        }
+    }
 }
 
 # endif /* NO_OPENCV */

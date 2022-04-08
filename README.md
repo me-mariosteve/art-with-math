@@ -9,14 +9,13 @@ Its purpose is to generate, animate and create an image or a video only using po
 ## Structure
 
 - [`includes`](includes) Contains includes included in every C++ file.
-- [`imgtools`](imgtools) My first try with OpenCV, a basic program to display/copy an image.
 - [`dataclass`](dataclass) Contains classes definition for `Point`, `Array` and `Data`.
 - [`algorithm`](algorithm) Contains various algorithms to generate arrays of points.
 - [`build`](build) Contains the CMake files and the executables.
 
 ## Build
 
-To build the project, you must have cmake, make, opencv installed.
+To build the project, you must have CMake, a C++ compiler and OpenCV installed.
 
 Then run the following command in the root folder:
 
@@ -28,4 +27,3 @@ It creates the cmake configuration files in `build/` then build the project.
 
 The produced executables are put in `build/`:
 - [`main.cpp`](main.cpp) -> `build/project`
-- [`imgtools/imgtools.cpp`](imgtools/imgtools.cpp) -> `build/imgtools`
