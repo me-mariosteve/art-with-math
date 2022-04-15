@@ -9,12 +9,6 @@ class Array {
 	
 public:
 
-    typedef T (*Func1) (T);
-    typedef T (*Func2) (T, T);
-    typedef void (*Proc1) (T);
-    typedef void (*Proc2) (T, T);
-    typedef T (*FReduce) (Array<T>);
-	
     size_t size;
     T *ptr;
     

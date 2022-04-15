@@ -48,7 +48,6 @@ namespace Algo::Grid {
     
     // lf1 for [l]ength, [f]unction, [1] parameter
     namespace _lf1 {
-
         
         template<typename T, typename F>
         ArrayP<T> lf1(T dx, F func ) {
@@ -68,9 +67,27 @@ namespace Algo::Grid {
 
     }
     using namespace _lf1;
-
-
-
+	
+	
+	
+    // lf2 for [l]ength, [f]unction, [1] parameter
+    namespace _lf2 {
+		
+        template<typename T, typename F>
+        ArrayP<T> lf2(T dx, T dy, F func) {
+            ArrayP<T> out(dx*dy);
+            for (T y = 0; y < dy; y++)
+                for (T x = 0; x < dx; x++)
+                    out[y*dx+x] = func(x, y);
+            return out;
+        }
+		
+    }
+	
+    using namespace _lf2;
+	
+	
+	
     // rf1 for [r]ange, [f]unction, [1] parameter
     namespace _rf1 {
     

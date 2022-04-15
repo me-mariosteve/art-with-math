@@ -41,7 +41,7 @@ public:
     OP(/)
 # undef OP
     
-        inline T dist(Point<T> other) {
+    inline T dist(Point<T> other) {
         return sqrt(pow(other.x - x, 2) + pow(other.y - y, 2));
     }
 
@@ -85,13 +85,7 @@ Data &operator>>(Data &in, Point<T> &_this) {
 
 template<typename T>
 void draw(Point<T> _this, cv::Mat mat) {
-    for (T y = -_this.radius; y <= _this.radius && y < mat.cols; y++) {
-        if (y < 0) continue;
-        for (T x = -_this.radius; x <= _this.radius && x < mat.rows; x++) {
-            if (x < 0) continue;
-            mat.at<cv::Vec3b>(_this.x+x, _this.y+y) = _this.color;
-        }
-    }
+    cv::circle(mat, cv::Point(_this.x, _this.y), _this.radius, _this.color, -1);
 }
 
 # endif /* NO_OPENCV */
