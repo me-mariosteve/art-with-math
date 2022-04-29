@@ -1,14 +1,24 @@
-# ifndef INCLUDES_INCLUDED
-# define INCLUDES_INCLUDED
+# pragma once
 
-# include "defines.hpp"
 
-# include "system_includes.hpp"
+//# define NO_DATA_SERIALIZATION
+//# define NO_OPENCV
+
+
+// STL
+# include <iostream> // for basic I/O on the terminal
+# include <fstream> // for I/O with files
+# include <string> // for operations on std::strings
+# include <cmath> // for various math functions that could be used
+# include <vector> // for std::vector
+# include <ctime> // for sleep
+
+// Linux library
+# include <unistd.h>
 
 # ifndef NO_OPENCV
-# include "opencv_includes.hpp"
+// OpenCV library
+# include <opencv2/opencv.hpp>
 # endif /* NO_OPENVC */
 
 # include "user_includes.hpp"
-
-# endif /* INCLUDES_INCLUDED */

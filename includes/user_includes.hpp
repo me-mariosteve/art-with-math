@@ -1,16 +1,8 @@
-# ifndef USER_INCLUDES_INCLUDED
-# define USER_INCLUDES_INCLUDED
+# pragma once
 
 
-# ifndef NO_DATA_SERIALIZATION
-# include "../dataclass/Data.cpp"
-# endif /* NO_DATA_SERIALIZATION */
 # include "../dataclass/Point.cpp"
-# include "../dataclass/Array.cpp"
-template<typename T>
-using ArrayP = Array<Point<T>>;
-# include "../algorithms/generate.cpp"
-# include "../algorithms/formulas.cpp"
 
-
-# endif /* USER_INCLUDES_INCLUDED */
+# include "../algorithms/Generator.cpp"
+# include "../algorithms/Algo.cpp"
+# include "../algorithms/cv.cpp"
