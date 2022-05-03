@@ -8,7 +8,7 @@ class Point {
   
 public:
     T x=0, y=0, sx=0, sy=0;
-    T radius=0, mass=0;
+    T radius=1, mass=1;
     cv::Vec3b color=(0, 0, 0);
 
 

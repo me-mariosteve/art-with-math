@@ -8,7 +8,7 @@
 
 template<class T>
 void draw(Point<T> _this, cv::Mat mat) {
-    cv::circle(mat, cv::Point(_this.x, _this.y), _this.radius, _this.color, -1);
+  cv::circle(mat, cv::Point(_this.x, _this.y), _this.radius, _this.color, -1);
 }
 
 
