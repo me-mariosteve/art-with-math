@@ -5,4 +5,4 @@ cppcheck \
     -v \
     --project=project.cppcheck \
     "$@" \
-    main.cpp
+    .
