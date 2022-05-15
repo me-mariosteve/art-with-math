@@ -30,7 +30,7 @@ public:
         x(x), y(y), sx(sx), radius(radius), mass(mass), color(color)
         {}
     
-    Point<T>(cv::Vec3b color):
+    explicit Point<T>(cv::Vec3b color):
         color(color)
         {}
 
@@ -41,16 +41,16 @@ public:
     
     
 # define OP(sym)                                        \
-    inline Point<T> operator sym (Point<T> other) {     \
+    inline Point<T> operator sym (const Point<T> &other) {     \
         return Point<T> (x sym other.x, y sym other.y); \
     }                                                   \
-    inline Point<T> operator sym##= (Point<T> other) {  \
+    inline Point<T> operator sym##= (const Point<T> &other) {  \
         return (*this = *this sym other);               \
     }                                                   \
-        inline Point<T> operator sym (T other) {        \
+        inline Point<T> operator sym (const T &other) {        \
             return Point<T> (x sym other, y sym other); \
         }                                               \
-        inline Point<T> operator sym##= (T other) {     \
+        inline Point<T> operator sym##= (const T &other) {     \
             return (*this = *this sym other);           \
         }
     OP(+);
@@ -60,7 +60,7 @@ public:
 # undef OP
     
     
-    inline T dist(Point<T> other) {
+    inline T dist(const Point<T> &other) {
         return sqrt(pow(other.x - x, 2) + pow(other.y - y, 2));
     }
 
@@ -69,8 +69,8 @@ public:
 
 
 template<class T>
-inline std::ostream &operator<<(std::ostream &out, Point<T> _this) {
-    return out << typeid(T).name() << "(" << _this.x << ", " << _this.y << ")";
+inline std::ostream &operator<<(std::ostream &out, const Point<T> &_this) {
+    return out << typeid(T).name() << "(" << _this.x << "," << _this.y << ")";
 }
 
 

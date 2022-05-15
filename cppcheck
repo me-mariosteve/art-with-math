@@ -1,0 +1,8 @@
+#! /bin/sh
+
+# Requires cppcheck (https://cppcheck.sourceforge.io/)
+cppcheck \
+    -v \
+    --project=project.cppcheck \
+    "$@" \
+    main.cpp

@@ -11,8 +11,9 @@
 # include <string> // for operations on std::strings
 # include <cmath> // for various math functions that could be used
 # include <vector> // for std::vector
-# include <ctime> // for sleep
-# include <functional> // for std::invoke
+# include <ctime>
+# include <functional>
+# include <numeric>
 
 // Linux library
 # include <unistd.h>
