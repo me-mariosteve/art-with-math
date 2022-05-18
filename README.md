@@ -14,9 +14,7 @@ It uses the [OpenCV](https://opencv.org/) C++ library for the images.
 
 ## Bugs
 
-I fixed the functions in [`algorithm/Algo.cpp`](algorithm/Algo.cpp), the points are correctly generated with `Generator::r2` and updated with `Algo::apply`.
-The only thing that doesn't work is the output.
-The arguments are passed to [`draw`](algorithm/cv.cpp), then even if there are the right values nothing is written to the video after the first frame.
+Everything should work as expected.
 
 ## Build
 
