@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="1">
+    <root name="src"/>
+    <builddir>cppcheck.d</builddir>
     <platform>Unspecified</platform>
     <analyze-all-vs-configs>false</analyze-all-vs-configs>
     <check-headers>true</check-headers>
@@ -14,7 +16,7 @@
         <library>opencv2</library>
     </libraries>
     <suppressions>
-        <suppression fileName="/home/mariosteve/git/cpp-opencv-things/">unusedFunction</suppression>
+        <suppression fileName="src">unusedFunction</suppression>
     </suppressions>
     <safe-checks>
         <class-public/>

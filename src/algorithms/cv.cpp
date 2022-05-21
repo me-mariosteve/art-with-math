@@ -14,7 +14,7 @@ void draw(const Point<T> &_this, cv::Mat &mat) {
 
 template<class T>
 void draw(const std::vector<T> &_this, cv::Mat &mat) {
-    for (const T it: _this)
+    for (const T &it: _this)
         draw(it, mat);
 }
 

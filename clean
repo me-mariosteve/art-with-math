@@ -1,3 +1,3 @@
 #! /bin/sh
-rm -r ./build
+rm -rI ./build
 rm -i out.avi

@@ -5,7 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(project main.cpp)
+add_executable(project src/main.cpp)
 target_link_libraries(project ${OpenCV_LIBS})
 
-add_compile_options(-v -Wall -Wextra -Werror -pedantic -o asan -fsanitize=undefined)
+target_include_directories(project
+        INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/includes/includes.hpp
+        PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
+        )
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
