@@ -13,4 +13,4 @@ target_include_directories(project
         PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
         )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -O5")

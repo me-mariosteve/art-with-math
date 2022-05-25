@@ -12,10 +12,10 @@ namespace Generator {
     
     template<class T, typename F>
     std::vector<Point<T>> rf1(T startx, T endx, T stepx, F func, Point<T> tmp=Point<T>()) {
-        std::vector<Point<T>> out(endx - startx, tmp);
-        size_t i = 0;
+        std::vector<Point<T>> out;
+        out.reserve(endx - startx, tmp);
         for (T x = startx; x < endx; x += stepx) {
-            out[i++] = func(x);
+            out.emplace_back(func(x));
         }
         return out;
     }
@@ -26,12 +26,13 @@ namespace Generator {
     
     template<class T>
     std::vector<Point<T>> r2(T startx, T endx, T stepx, T starty, T endy, T stepy, const Point<T> &tmp=Point<T>()) {
-        std::vector<Point<T>> out((endx - startx) * (endy - starty) / (stepx * stepy), tmp);
-        size_t i = 0;
+        std::vector<Point<T>> out;
+        out.reserve((endx - startx) * (endy - starty) / (stepx * stepy));
         for (T x = startx; x < endx; x += stepx) {
             for (T y = starty; y < endy; y += stepy) {
-                out[i].x = x;
-                out[i++].y = y;
+                out.emplace_back(tmp);
+                out.back().x = x;
+                out.back().y = y;
             }
         }
         return out;
@@ -42,11 +43,10 @@ namespace Generator {
     
     template<class T, typename F>
     std::vector<Point<T>> rf2(T startx, T endx, T stepx, T starty, T endy, T stepy, F func, Point<T> tmp=Point<T>()) {
-        std::vector<Point<T>> out((endx - startx) * (endy - starty) / (stepx * stepy), tmp);
-        size_t i = 0;
+        std::vector<Point<T>> out((endx - startx) * (endy - starty) / (stepx * stepy));
         for (T x = startx; x < endx; x += stepx) {
             for (T y = starty; y < endy; y += stepy) {
-                out.at(i) = func(tmp, x, y);
+                out.emplace_back(func(tmp, x, y));
             }
         }
         return out;
@@ -57,14 +57,28 @@ namespace Generator {
 
     template<class T>
     std::vector<Point<T>> disk(T x, T y, T r, T dt, T di, Point<T> tmp=Point<T>()) {
-        std::vector<Point<T>> out(Math::TAU/dt*r/di, tmp);
-        size_t id = 0;
-        for (T t = 0; t+dt < Math::TAU; t += dt)
-            for (T i = 0; i+di < r; i += di) {
-                out.at(id).x = x+sin(t)*i;
-                out.at(id++).y = y+cos(t)*i;
+        std::vector<Point<T>> out;
+        out.reserve((Math::TAU/dt+1) * (r/di+1));
+        for (T t = 0; t < Math::TAU; t += dt)
+            for (T i = 0; i < r; i += di) {
+                out.emplace_back(tmp);
+                out.back().x = x+sin(t)*i;
+                out.back().y = y+cos(t)*i;
             }
         return out;
     }
 
+
+    template<class T, class F>
+    std::vector<Point<T>> disk_fn(T r, T dt, T di, F func, Point<T> tmp=Point<T>()) {
+        std::vector<Point<T>> out;
+        out.reserve((Math::TAU/dt+1) * (r/di+1));
+        for (T t = 0; t < Math::TAU; t += dt)
+            for (T i = 0; i < r; i += di) {
+                out.emplace_back(func(tmp, t, i));
+            }
+        return out;
+    }
+    
+    
 }

@@ -12,6 +12,7 @@
 # include <fstream> // for I/O with files
 # include <filesystem> // for interacting with the filesystem, eg rename, exists
 # include <cmath> // for various math functions that could be used
+# include <chrono> // for time in micro, nanoseconds
 # include <ctime>
 # include <functional>
 # include <numeric>

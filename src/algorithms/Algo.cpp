@@ -31,8 +31,8 @@ namespace Algo {
             temp.reserve(_this.size()-1);
             for (T &v2: _this)
                 if (&v1 != &v2)
-                    temp.push_back(binary_op(v1, v2));
-            res.push_back(reduce(temp));
+                    temp.emplace_back(binary_op(v1, v2));
+            res.emplace_back(reduce(temp));
         }
         _this = res;
     }
@@ -44,7 +44,7 @@ namespace Algo {
         std::vector<T2> res;
         res.reserve(_this.size());
         std::for_each(_this.begin(), _this.end(), [&] (const T1 &val) -> void {
-            res.push_back(val.*data_ptr);
+            res.emplace_back(val.*data_ptr);
         });
         return res;
     }

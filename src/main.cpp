@@ -5,21 +5,9 @@ using namespace PointAlgo;
 
 
 int main(int argc, char **argv) {
-    
 
-    
-    typedef double T;
-    typedef Point<T> Pt;
-    const Pt POINT_TEMPLATE(0, 0, 0, 0, 1, 1, cv::Vec3b(0, 0, 255));
-
-    const int X = 480, Y = 360, FPS = 30, TOTAL_FRAMES = 300;
-    
     
     const std::string OUTPUT_FILE = "out.avi";
-    const int CODEC = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
-    const cv::Size SIZE(X, Y);
-    const bool IS_COLOR = true;
-
     
     if (std::filesystem::exists(OUTPUT_FILE)) {
 
@@ -45,56 +33,82 @@ int main(int argc, char **argv) {
         
     }
 
-    
+    const int X = 1920, Y = 1080, TOTAL_FRAMES = 1000;
+    const cv::Size SIZE(X, Y);
+
     cv::VideoWriter videoOutput;
     if (!videoOutput.open(
             OUTPUT_FILE,
-            CODEC,
-            FPS,
+            cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), // codec
+            30, // fps
             SIZE,
-            IS_COLOR
+            true // the video will contain colors
             )) {
         std::cerr << "Failed to open video." << std::endl;
     }
+
+    
+    typedef double T;
+    typedef Point<T> Pt;
+    const Pt POINT_TEMPLATE(X/2, Y/2, 0, 0, 1, 1, cv::Vec3b(255, 255, 255));
+    T RADIUS = sqrt(X*X+Y*Y);
     
     // generate points
-    std::vector<Pt> pts = Generator::disk<T>(X/2, Y/2, sqrt(X*X+Y*Y)/4, Math::TAU/36, 10, POINT_TEMPLATE);
+    std::vector<Pt> pts = Generator::disk_fn<T>(
+        RADIUS/4, Math::TAU/150, RADIUS/4/100,
+        [&] (Pt pt, T theta, T r) -> Pt {
+            pt.x += sin(theta)*r*pow(r/RADIUS*4, 4);
+            pt.y += cos(theta)*r*pow(r/RADIUS*4, 4);
+            return pt;
+        },
+        POINT_TEMPLATE);
     
-    int time = 0;
-    while (time < TOTAL_FRAMES) {
+    std::cout << pts.size() << " points created." << std::endl << std::fixed;
+    
+
+    std::chrono::duration<double> t_sum = std::chrono::duration<double>();
+    
+    int time = 0, frameCount = 1;
+    while (frameCount <= TOTAL_FRAMES) {
 
         // write the frame to the video
-        // I remembered that X and Y must be reversed for cv::Mat after 2 weeks of pain
-        cv::Mat frame(Y, X, CV_8UC3, cv::Vec3b(0, 0, 0));
+        cv::Mat frame(SIZE, CV_8UC3, cv::Vec3b(0, 0, 0));
         draw(pts, frame);
         videoOutput.write(frame);
 
+        std::cout << "\033[2KFrame " << frameCount << " / " << TOTAL_FRAMES << "... ";
         
-        std::cout << "Frame " << time << " / " << TOTAL_FRAMES << "..." << std::endl;
-
-        // update the points
-        PointAlgo::doAll(pts,
-                         [&] (Pt &p1, Pt &p2) -> Pt {
-                             Pt ret = p1;
-                             T
-                                 dx = p2.x - p1.x, dy = p2.y - p1.y, d = sqrt(dx*dx + dy*dy),
-                                 surf_dist = (d += d<=1) - p1.radius - p2.radius,
-                                 _sin = dx/d, _cos = dy/d,
-                                 attraction = (p1.mass * p2.mass) / pow(d, 2),
-                                 //repulsion = 0,//log(dist - surf_dist),
-                                 force = attraction, //- repulsion,
-                                 force_x = force * _sin, force_y = force * _cos;
-                             ret.sx += force_x, ret.sy += force_y;
-                             return ret;
-                         },
-                         PointAlgo::meanFull<T>
+        // to get the time needed to make a frame
+        std::chrono::time_point t_begin = std::chrono::high_resolution_clock::now();
+        
+        PointAlgo::doAll_meanFull(pts,
+                                  [&] (const Pt &p1, const Pt &p2) -> Pt {
+                                      Pt ret = p1;
+                                      T dx = p2.x-p1.x, dy = p2.y-p1.y, d = sqrt(dx*dx + dy*dy);
+                                      d += d<1;
+                                      T _sin = dx/d, _cos = dy/d,
+                                          surf_dist = d-p1.radius-p2.radius,
+                                          direct = (surf_dist<0) * surf_dist/2,
+                                          force = (p1.mass*p2.mass) / (d*d);
+                                      ret.x += direct*_sin, ret.y += direct*_cos;
+                                      ret.sx += force*_sin, ret.sy += force*_cos;
+                                      return ret;
+                                  }
             );
 
-        // Thanks to fnky on github!
-        // https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#cursor-controls
-        std::cout << "\033[1F";
+        std::chrono::time_point t_end = std::chrono::high_resolution_clock::now();
+        // https://stackoverflow.com/a/30849282/18598705
+        std::chrono::duration<double> t_diff = std::chrono::duration_cast<std::chrono::duration<double>> (t_end-t_begin);
+        t_sum += t_diff;
+        
+        std::cout << " "
+                  << t_diff.count() << "s, mean "
+                  << (t_sum/frameCount).count() << "s, "
+                  << (t_sum/frameCount * (TOTAL_FRAMES-frameCount)).count() << " remaining."
+                  << std::endl << "\033[1F"; // Thanks to fnky on github for the ANSI escape code! https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#cursor-controls
         
         time++;
+        frameCount++;
     }
 
     std::cout << std::endl;
