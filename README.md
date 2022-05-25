@@ -58,5 +58,7 @@ When the dependencies are installed, you have 2 choices:
 
 If you have [cppcheck](https://cppcheck.sourceforge.io/) installed, the configuration file is
 [`project.cppcheck`](project.cppcheck). The directory [`cppcheck.d`](cppcheck.d) will contains the produced files.
-I made a small script [`cppcheck.sh`](cppcheck.sh) to call use it from command line:
-`./cppcheck.sh [optionnal arguments for cppcheck]`
+I made a small script [`cppcheck.sh`](cppcheck.sh) to use it from command line:
+```bash
+./cppcheck.sh [optionnal arguments for cppcheck]`
+```
