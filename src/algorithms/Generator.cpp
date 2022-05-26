@@ -70,13 +70,12 @@ namespace Generator {
 
 
     template<class T, class F>
-    std::vector<Point<T>> disk_fn(T r, T dt, T di, F func, Point<T> tmp=Point<T>()) {
-        std::vector<Point<T>> out;
-        out.reserve((Math::TAU/dt+1) * (r/di+1));
-        for (T t = 0; t < Math::TAU; t += dt)
-            for (T i = 0; i < r; i += di) {
-                out.emplace_back(func(tmp, t, i));
-            }
+    Array<Point<T>> disk_fn(T r, T dt, T di, F func, Point<T> tmp=Point<T>()) {
+        Array<Point<T>> out = (Math::TAU/dt) * (r/di) + 1;
+        size_t id = 0;
+        for (T t = dt; t < Math::TAU && id < out.size; t += dt)
+            for (T i = 0; i < r && id < out.size; i += di, id++)
+                out.ptr[id] = func(tmp, t, i);
         return out;
     }
     

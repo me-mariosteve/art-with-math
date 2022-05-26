@@ -7,19 +7,16 @@
 
 // STL
 # include <iostream> // for basic I/O on the terminal
-# include <string> // for operations on std::strings
+# include <string> // for std::string
 # include <vector> // for std::vector
 # include <fstream> // for I/O with files
 # include <filesystem> // for interacting with the filesystem, eg rename, exists
-# include <cmath> // for various math functions that could be used
+//# include <cmath> // for various math functions that could be used
 # include <chrono> // for time in micro, nanoseconds
-# include <ctime>
-# include <functional>
-# include <numeric>
-
+# include <numeric> // std::accumulate
 
 // Linux library
-# include <unistd.h>
+//# include <unistd.h>
 
 # ifndef NO_OPENCV
 // OpenCV library

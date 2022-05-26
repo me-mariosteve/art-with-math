@@ -1,6 +1,5 @@
 # include "includes/includes.hpp"
 
-
 using namespace PointAlgo;
 
 
@@ -25,12 +24,11 @@ int main(int argc, char **argv) {
     {
         // Parse command-line arguments
         int i;
-        std::string arg;
         auto seti = [&] (auto &ref) {
             ref = std::stoi(argv[++i]);
         };
         for (i = 0; i < argc; i++) {
-            arg = argv[i];
+        std::string arg = argv[i];
             
             if (arg == "-h" || arg == "--help") {
                 std::cout <<
@@ -145,24 +143,23 @@ int main(int argc, char **argv) {
     
     
     // generate points
-    T RADIUS = sqrt(pow(params.width, 2)+pow(params.height, 2));
-    std::vector<Pt> pts = Generator::disk_fn<T>(
-        RADIUS/10, Math::TAU/100, RADIUS/10/100,
+    T radius = sqrt(pow(params.width, 2)+pow(params.height, 2));
+    Array<Pt> pts = Generator::disk_fn<T>(
+        radius/20, Math::TAU/100, radius/20/100,
         [&] (Pt pt, T theta, T r) -> Pt {
-            pt.x += sin(theta)*r*pow(r/RADIUS*10, 4);
-            pt.y += cos(theta)*r*pow(r/RADIUS*10, 4);
+            pt.x += sin(theta)*r*pow(r/radius*20, 4);
+            pt.y += cos(theta)*r*pow(r/radius*20, 4);
             return pt;
         },
         params.point);
     
-    std::cout << pts.size() << " points created." << std::endl << std::fixed;
-    
+    std::cout << pts.size << " points created." << std::endl << std::fixed;
 
     std::chrono::duration<double> t_sum = std::chrono::duration<double>();
     
     int time = 0, frameCount = 1;
     while (frameCount <= params.length) {
-
+        
         // write the frame to the video
         cv::Mat frame(params.size, CV_8UC3, cv::Vec3b(0, 0, 0));
         draw(pts, frame);
@@ -203,6 +200,6 @@ int main(int argc, char **argv) {
         frameCount++;
     }
 
-    std::cout << std::endl;
+    std::cout << "\nmain() finished." << std::endl;
     
 }

@@ -4,7 +4,8 @@
     
 The goal of this program is to create art with algorithms and calculus.
 
-It uses the [OpenCV](https://opencv.org/) C++ library for the images.
+It uses the [OpenCV](https://opencv.org/) C++ library to create images, and I
+define my own algorithms and functions.
 
 ## Structure of the C++ sources files
 
@@ -13,8 +14,7 @@ All the C++ source files are in the directory [`src`](src).
 - [`main.cpp`](src/main.cpp) main.cpp with the `main` definition.
 - [`includes`](src/includes) contains includes included in every C++ file.
 - [`algorithm`](src/algorithm) contains algorithms I made.
-- [`data`](src/data) contains stuff for storing and using various data
-  like the class `Point` and `namespace Math` for mathematic constants.
+- [`data`](src/data) contains stuff for storing and using various data, the classes `Point` and `Array` and the namespace `Math`.
 
 ## What it does
 
@@ -28,7 +28,7 @@ I already said that but this time I've checked.
 
 ## Build
 
-To build the project, you must have [CMake](https://cmake.org), a C++ compiler and [OpenCV 4.5.5](https://github.com/opencv/opencv/tree/4.5.5) installed.
+To build the project, you must have [CMake](https://cmake.org), a C++ compiler and [OpenCV at least 4.5.5](https://github.com/opencv/opencv/tree/4.5.5) installed.
 
 When the dependencies are installed, you have 2 choices:
 
