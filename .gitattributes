@@ -10,4 +10,5 @@
 *.cpp !text !filter !merge !diff
 *.hpp !text !filter !merge !diff
 * !text !filter !merge !diff
+out.avi filter=lfs diff=lfs merge=lfs -text
 out.avi !text !filter !merge !diff
