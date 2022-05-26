@@ -16,7 +16,8 @@
         <library>opencv2</library>
     </libraries>
     <suppressions>
-        <suppression fileName="src">unusedFunction</suppression>
+        <suppression fileName="/home/mariosteve/git/cpp-opencv-things/src">unusedFunction</suppression>
+        <suppression fileName="/home/mariosteve/git/cpp-opencv-things/src">noExplicitConstructor</suppression>
     </suppressions>
     <safe-checks>
         <class-public/>

@@ -10,3 +10,4 @@
 *.cpp !text !filter !merge !diff
 *.hpp !text !filter !merge !diff
 * !text !filter !merge !diff
+out.avi !text !filter !merge !diff
