@@ -5,3 +5,4 @@ out.avi
 cppcheck.d
 /outputs
 .emacs.desktop
+.emacs.desktop.lock

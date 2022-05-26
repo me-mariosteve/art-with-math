@@ -1,7 +1,7 @@
 # cpp-opencv-things
 
 ## Description
-
+    
 The goal of this program is to create art with algorithms and calculus.
 
 It uses the [OpenCV](https://opencv.org/) C++ library for the images.
@@ -53,6 +53,43 @@ When the dependencies are installed, you have 2 choices:
   ```bash
   ./clean.sh
   ```
+
+## Usage
+
+Here is the program usage:
+
+``` text
+Usage:
+  ./build/project
+    [-h | --help] [-u | --usage] [-L | --license]
+    [{-o | --output} FILE]
+    [{-w | --width} WDITH] [{-h | --height} HEIGHT] [{-s | --size} WIDTH HEIGHT]
+    [--fps FPS] [{-l | --length} LENGTH]
+    [{-psx | --point-sx} SX] [{-psy | --point-sy} SY]
+    [{-pr | --point-radius} RADIUS] [{-pm | --point-mass} MASS]
+    [{-pc | --point-color} R G B]
+
+Warning: short options cannot be combined into one, for example '-o -s' is not '-os'.
+
+Options description, with default value(s) in brackets:
+
+  -h, --help      Show the help for this program.
+  -u, --usage     Show a shorter help message.
+  -L, --license   Show the license.
+
+  -o, --output FILE         Write the video to FILE. [./out.avi]
+  -w, --width WIDTH         Set the video width. [1920]
+  -h, --height HEIGHT       Set the video height. [1080]
+  -s, --size WIDTH HEIGHT   Set the video width and height. [1920] [1080]
+  --fps FPS                 Set the frames per seconds. [10]
+  -l, --length LENGTH       Set the number of frames in the video. [300]
+
+  -psx, --point-sx SX          Set the x points speed at start. [0]
+  -psy, --point-sy SY          Set the y points speed at start. [0]
+  -pr, --point-radius RADIUS   Set the points radius. [1]
+  -pm, --point-mass MASS       Set the points mass. [10]
+  -pc, --point-color R G B     Set the points color (decimal). [255 255 255]
+```
 
 ## Tools
 
