@@ -10,7 +10,7 @@ public:
     size_t size;
     T *ptr;
     
-    Array<T> (size_t size):
+    Array<T> (const size_t &size):
         size(size), ptr(static_cast<T *> (malloc( sizeof(T) * size )))
         {}
     
