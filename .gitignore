@@ -3,3 +3,5 @@
 out.png
 out.avi
 cppcheck.d
+/outputs
+.emacs.desktop
