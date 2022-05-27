@@ -57,7 +57,7 @@ Options description, with default value(s) in brackets:
 Everything should work as expected.
 I already said that but this time I've checked.
 
-I have a [new problem]() (not really important but really strange)
+I have a [new problem](https://github.com/me-mariosteve/physics/blob/master/src/algorithms/Generator.cpp#L73) (not really important but really strange)
 
 ## Build
 
