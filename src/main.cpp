@@ -145,13 +145,14 @@ int main(int argc, char **argv) {
     // generate points
     T radius = sqrt(pow(params.width, 2)+pow(params.height, 2));
     Array<Pt> pts = Generator::disk_fn<T>(
-        radius/20, Math::TAU/100, radius/20/100,
-        [&] (Pt pt, T theta, T r) -> Pt {
-            pt.x += sin(theta)*r*pow(r/radius*20, 4);
-            pt.y += cos(theta)*r*pow(r/radius*20, 4);
-            return pt;
-        },
-        params.point);
+        radius/50, Math::TAU/360, radius/50/10,
+        [&] (T &r, T &t) -> void {
+            t = t*4;
+            r *= pow(r/log(radius*50), 2);
+        }, params.point);
+
+    // arbitrary distance after which 2 points won't interact
+    const T MAX_INTERACTION_RADIUS = pow(params.point.mass, 2);
     
     std::cout << pts.size << " points created." << std::endl << std::fixed;
 
@@ -174,13 +175,18 @@ int main(int argc, char **argv) {
                                   [&] (const Pt &p1, const Pt &p2) -> Pt {
                                       Pt ret = p1;
                                       T dx = p2.x-p1.x, dy = p2.y-p1.y, d = sqrt(dx*dx + dy*dy);
-                                      d += d<1;
-                                      T _sin = dx/d, _cos = dy/d,
-                                          surf_dist = d-p1.radius-p2.radius,
-                                          direct = (surf_dist<0) * surf_dist/2,
-                                          force = (p1.mass*p2.mass) / (d*d);
-                                      ret.x += direct*_sin, ret.y += direct*_cos;
-                                      ret.sx += force*_sin, ret.sy += force*_cos;
+                                      if (d < MAX_INTERACTION_RADIUS) {
+                                          if (d < 1)
+                                              d++;
+                                          T _sin = dx/d, _cos = dy/d,
+                                              surf_dist = d-p1.radius-p2.radius,
+                                              force = (p1.mass*p2.mass) / (d*d);
+                                          if (surf_dist < 0) {
+                                              T temp = surf_dist/2;
+                                              ret.x -= temp*_sin, ret.y -= temp*_cos;
+                                          }
+                                          ret.sx += force*_sin, ret.sy += force*_cos;
+                                      }
                                       return ret;
                                   }
             );
