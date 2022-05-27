@@ -57,6 +57,8 @@ Options description, with default value(s) in brackets:
 Everything should work as expected.
 I already said that but this time I've checked.
 
+I have a [new problem]() (not really important but really strange)
+
 ## Build
 
 To build the project, you must have [CMake](https://cmake.org), a C++ compiler and [OpenCV at least 4.5.5](https://github.com/opencv/opencv/tree/4.5.5) installed.

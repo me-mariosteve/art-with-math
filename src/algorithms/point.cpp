@@ -51,7 +51,7 @@ namespace PointAlgo {
     template<class T, class BinaryOperation>
     void doAll_meanFull(Array<Point<T>> &_this, BinaryOperation binary_op) {
         size_t size1 = _this.size-1;
-        Array<Point<T>> res = _this.size;
+        Array<Point<T>> res(_this.size);
         _this.foreach_vi([&] (Point<T> &v1, size_t &i) -> void {
             T x = T(), y = T(), sx = T(), sy = T(), mass = T(), radius = T();
             int col0 = 0, col1 = 0, col2 = 0;

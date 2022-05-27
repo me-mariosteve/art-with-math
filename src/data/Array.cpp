@@ -7,12 +7,23 @@ class Array {
     
 public:
     
-    size_t size;
+    const size_t size;
     T *ptr;
     
+
     Array<T> (const size_t &size):
         size(size), ptr(static_cast<T *> (malloc( sizeof(T) * size )))
         {}
+    
+    Array<T> (Array<T> &other):
+        size(other.size), ptr(other.ptr)
+        {}
+    
+    Array<T> &operator=(Array<T> &other) {
+        for (size_t i = 0; i < size; i++)
+            ptr[i] = other.ptr[i];
+        return *this;
+    }
     
     
     inline T &operator[](const size_t &index) {

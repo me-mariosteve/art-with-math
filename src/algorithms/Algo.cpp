@@ -28,9 +28,9 @@ namespace Algo {
 
     template<class T, class BinaryOperation, class R>
     void apply(Array<T> &_this, BinaryOperation binary_op, R reduce) {
-        Array<T> res = _this.size;
+        Array<T> res( _this.size);
         _this.foreach_vi([&] (const T &v1, const size_t &i) -> void {
-            Array<T> temp = _this.size-1;
+            Array<T> temp(_this.size-1);
             size_t temp_id = 0;
             _this.foreach_vi([&] (const T &v2, const size_t &j) -> void {
                 if (i != j)
@@ -45,7 +45,7 @@ namespace Algo {
     
     template <class T1, class T2>
     Array<T2> getData(const Array<T1> &_this, T2 T1::*data_ptr) {
-        Array<T2> res = _this.size;
+        Array<T2> res(_this.size);
         _this.foreach_vi([&] (const T1 &val, const size_t &i) {
             res[i] = val.*data_ptr;
         });

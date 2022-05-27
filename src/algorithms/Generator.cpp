@@ -73,9 +73,17 @@ namespace Generator {
     Array<Point<T>> disk_fn(T r, T dt, T di, F func, Point<T> tmp=Point<T>()) {
         Array<Point<T>> out = (Math::TAU/dt) * (r/di) + 1;
         size_t id = 0;
-        for (T t = dt; t < Math::TAU && id < out.size; t += dt)
-            for (T i = 0; i < r && id < out.size; i += di, id++)
+        for (T t = dt; t < Math::TAU; t += dt)
+            for (T i = 0; i < r; i += di, id++)
                 out.ptr[id] = func(tmp, t, i);
+        /* The loop below is faster than the one above,
+         * even though it does 2 more tests `id < out.size` in each loop:
+         * for (T t = dt; t < Math::TAU && id < out.size; t += dt)
+         *     for (T i = 0; i < r && id < out.size; i += di, id++)
+         *         out.ptr[id] = func(tmp, t, i);
+         * Average time per frame with the 1st loop (without the 2 tests): 0.541930
+         * Average time per frame with the 2nd, and nothing else changed: 0.530915
+        */
         return out;
     }
     
