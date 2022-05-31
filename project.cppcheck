@@ -8,17 +8,9 @@
     <check-unused-templates>true</check-unused-templates>
     <max-ctu-depth>4</max-ctu-depth>
     <max-template-recursion>100</max-template-recursion>
-    <exclude>
-        <path name="cppcheck.d/"/>
-        <path name="build/"/>
-    </exclude>
     <libraries>
         <library>opencv2</library>
     </libraries>
-    <suppressions>
-        <suppression fileName="/home/mariosteve/git/cpp-opencv-things/src">unusedFunction</suppression>
-        <suppression fileName="/home/mariosteve/git/cpp-opencv-things/src">noExplicitConstructor</suppression>
-    </suppressions>
     <safe-checks>
         <class-public/>
     </safe-checks>
